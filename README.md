@@ -1,4 +1,3 @@
-# Advance-Task
 package loginProcess;
 
 import java.util.List;
@@ -50,40 +49,52 @@ public class ValidLogIn {
 		List<WebElement> itemPrice= driver.findElements(By.className("inventory_item_price"));
 
 		
-
-		for (int i=0; i<addToCart.size(); i++) {
-			if (ItemsName.get(i).getText().contains("Backpack")||ItemsName.get(i).getText()
-					.contains("Fleece") || ItemsName.get(i).getText().contains("Onesie")) {
-				String PriceAfterTax = itemPrice.get(i).getText().replace("$","");
-				double PriceAsDouble = Double.parseDouble(PriceAfterTax);
-				double TaxValue = .10;
-				double FinalPrice=PriceAsDouble*TaxValue+PriceAsDouble;
-				 if ((int) (FinalPrice / 2) % 2 == 0) {
-				System.out.println("this item "+ItemsName.get(i) 
-		.getText()+"WAS NOT ADDED" +" and the origin price of this item is "
-						+ itemPrice.get(i).getText()
-						+"the price after tax is an odd number and the value is "+FinalPrice);}
-				 else {
-					 System.out.println("this item "+ItemsName.get(i) 
-						.getText()+"WAS NOT ADDED" +" and the origin price of this item is "
-										+ itemPrice.get(i).getText()
-										+"the price after tax is an even number and the value is "+FinalPrice);
-				 }
-				
-				continue;
-				 
-			}
-			else { addToCart.get(i).click();
-			System.out.println("this item "+ItemsName .get(i).getText()
-					+"was added"+" and the price of this item is "+ itemPrice.get(i).getText());
-				
-			}
-			
+		for (int i = 0; i < addToCart.size(); i++) {
+		    if (ItemsName.get(i).getText().contains("Backpack") || ItemsName.get(i).getText()
+		            .contains("Fleece") || ItemsName.get(i).getText().contains("Onesie")) {
+		        String PriceAfterTax = itemPrice.get(i).getText().replace("$", "");
+		        double PriceAsDouble = Double.parseDouble(PriceAfterTax);
+		        double TaxValue = 0.10;
+		        double FinalPrice = PriceAsDouble * TaxValue + PriceAsDouble;
+		        if ((int) (FinalPrice / 2) % 2 == 0) {
+		            System.out.println("this item " + ItemsName.get(i)
+		                    .getText() + " WAS NOT ADDED" + " and the origin price of this item is "
+		                    + itemPrice.get(i).getText()
+		                    + " the price after tax is an odd number and the value is " + FinalPrice);
+		        } else {
+		            System.out.println("this item " + ItemsName.get(i)
+		                    .getText() + " WAS NOT ADDED" + " and the origin price of this item is "
+		                    + itemPrice.get(i).getText()
+		                    + " the price after tax is an even number and the value is " + FinalPrice);
+		        }
+		        continue;
+		    } else {
+		        String PriceAfterTax = itemPrice.get(i).getText().replace("$", "");
+		        double PriceAsDouble = Double.parseDouble(PriceAfterTax);
+		        double TaxValue = 0.10;
+		        double FinalPrice = PriceAsDouble * TaxValue + PriceAsDouble;
+		    
+		        addToCart.get(i).click();
+		        System.out.println("this item " + ItemsName.get(i).getText()
+		                + " was added" + " and the price of this item is " + itemPrice.get(i).getText());
+		        if ((int) (FinalPrice / 2) % 2 == 0) {
+		            System.out.println("and this number is an Even number");
+		        } else {
+		            System.out.println("and this number is an ODD number");
+		        }
+		    }
 		}
-
+	}
 		
+	
+	
+	@AfterTest 
+	public void PostTesting (){
+		driver.quit();
 	}
 	
+
+}
 	
 	@AfterTest 
 	public void PostTesting (){
